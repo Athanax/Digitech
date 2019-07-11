@@ -8,6 +8,6 @@ class Testimonial extends Model
 {
     //
     protected $fillables = [
-        'name','role','body',''
+        'name','role','body'
     ];
 }
