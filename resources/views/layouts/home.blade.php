@@ -66,7 +66,7 @@
         <div class="container py-1">
           <div class="row align-items-center">
             <div class="col-2">
-              <h2 class="mb-0 site-logo"><a href="index.html">Industrie</a></h2>
+              <h2 class="mb-0 site-logo"><a href="index.html">Digitech</a></h2>
             </div>
             <div class="col-10">
               <nav class="site-navigation text-right" role="navigation">
@@ -74,33 +74,37 @@
                   <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
 
                   <ul class="site-menu js-clone-nav d-none d-lg-block">
-                    <li class="has-children active">
-                      <a href="index.html">Home</a>
-                      <ul class="dropdown arrow-top">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
-                        <li class="has-children">
-                          <a href="#">Sub Menu</a>
-                          <ul class="dropdown">
-                            <li><a href="#">Menu One</a></li>
-                            <li><a href="#">Menu Two</a></li>
-                            <li><a href="#">Menu Three</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact us</a></li>
+
+                    @guest
                     <li class="has-children">
-                      <a href="about.html">Company</a>
+                      <a>Account</a>
                       <ul class="dropdown arrow-top">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
+                        <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                        <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                       </ul>
                     </li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+
+                    
+                    @else
+                    <li class="has-children">
+                      <a href="/home">{{ Auth::user()->name }} wambua</a>
+                      <ul class="dropdown arrow-top">
+                        <li><a onclick="
+                        event.preventDefault(); document.getElementById('logout-form').submit();" 
+                          href="{{ route('logout') }}">{{ __('Logout') }}</a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                      </ul>
+                    </li>
+                    
+                    @endguest
+                    <li><a href="/blog">Blog</a></li>
+
                   </ul>
                 </div>
               </nav>
@@ -109,7 +113,9 @@
         </div>
       </div>
     </div>
-
+    <div class="container-fluid">
+      @yield('content')
+    </div>
     <footer class="site-footer">
       <div class="container">
         

@@ -12,9 +12,26 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.home');
+    return view('pages.index');
 });
+Route::get('/contact', function () {
+    return view('pages.contact');
+});
+
+Route::get('/about', function () {
+    return view('pages.about');
+});
+Route::get('/blog', function () {
+    return view('pages.blog');
+});
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('/services', 'ActivitiesController');
+
+Route::resource('/profile','ProfilesController');
+
+Route::resource('/posts','PostsController');
