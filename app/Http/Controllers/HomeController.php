@@ -25,6 +25,10 @@ class HomeController extends Controller
     public function index()
     {
         $profile = Profile::first();
+
+        if (empty($profile)) {
+            return redirect()->route('profile.create');
+        }
         
         return view('home')
             ->with('profile', $profile);
